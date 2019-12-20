@@ -18,7 +18,6 @@ class Home(LoginRequiredMixin, ListView):
     template_name = 'photo_blog/home.html'
     #paginate_by = 4
 
-# Queryset возвращает сообщения с авторами, за которыми следит аутентифицированный пользователь.
     def get_queryset(self):
         following = []
         pk = self.request.user
@@ -28,9 +27,6 @@ class Home(LoginRequiredMixin, ListView):
         object_list = Post.objects.filter(author_id__in=following).order_by('-date_posted')
         return object_list
 
-
-# Если запрос начинается с хэштега, отображаются сообщения с хэштегом.
-# Если запрос не начинается с хэштега, возвращаются профили пользователей.
 def search(request):
     queryset = None
     query = request.GET.get('q')
@@ -137,11 +133,6 @@ class DeleteComment(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
         return reverse( 'photo_blog-detail', args={pk: 'pk'})
 
 
-
-# Это представление создает REST API. Каждый раз, когда к REST API обращаются
-# через кнопку jQuery, аутентифицированный пользователь добавляется / удаляется из
-# списка пользователей, которым понравилась публикация.
-
 class LikePostAPI(APIView):
     authentication_classes = (authentication.SessionAuthentication,)
     permission_classes = (permissions.IsAuthenticated,)
@@ -182,8 +173,6 @@ class ViewLikes(LoginRequiredMixin, ListView):
         post = get_object_or_404(Post, id=self.kwargs.get('pk'))
         return post
 
-
-# Queryset возвращает три типа уведомлений, характерных для каждого пользователя.
 class ViewNotifications(LoginRequiredMixin, ListView):
     model = Notification
     template_name = 'photo_blog/notifications.html'
