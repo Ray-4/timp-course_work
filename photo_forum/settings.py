@@ -35,8 +35,8 @@ INSTALLED_APPS = [
     'photo_blog.apps.PhotoBlogConfig',
     'users.apps.UsersConfig',
     'direct_messages.apps.DirectMessagesConfig',
-    'material', # ЧТО ЭТО?
-    'rest_framework', # ЧТО ЭТО?
+    'material', 
+    'rest_framework', 
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
