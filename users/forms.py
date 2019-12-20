@@ -54,25 +54,18 @@ class RegistrForm(UserCreationForm):
         model = User
         fields = ['username', 'email', 'password1', 'password2']
 
-    # проверяет есть ли этот email уже в базе данных
     def clean_email(self):
         email = self.cleaned_data['email'].strip()
-        # __iexaxt - фильтр для регистро-независимого точного совпадения
         if User.objects.filter(email__iexact=email).exists():
             raise forms.ValidationError('Данный email уже используется')
         return email
 
-    # проверяет если данный user в базе данных
     def clean_username(self):
         username = self.cleaned_data['username'].strip()
-        # __exaxt - фильтр для регистро-зависимого точного совпадения
-        # exists() - возвращает True если QuerySet содержит какой-либо результат,
-        # и False, если не содержит.
         if User.objects.filter(username__exact=username).exists():
             raise forms.ValidationError('Пользователь с таким именем уже существует.')
         return username
 
-    # проверка совпадения паролей
     def clean_password2(self):
 
         cd_1 = self.cleaned_data['password1']
@@ -99,20 +92,9 @@ class EditUserForm(forms.ModelForm):
         }
     )
 
-    """
-    # проверяет есть ли этот email уже в базе данных
-    def clean_email(self):
-        email = self.cleaned_data['email'].strip()
-        # __iexaxt - фильтр для регистро-независимого точного совпадения
-        if User.objects.filter(email__iexact=email).exists():
-            raise forms.ValidationError('Данный email уже используется')
-        return email
-    """
-
     class Meta:
         model = User
         fields = ['username', 'email']
-
 
 
 
@@ -146,7 +128,7 @@ class AuthorizationForm (AuthenticationForm):
         'required': _('Это поле обязательно к заполнению!!.'),
     }
 
-    empty_values = list(validators.EMPTY_VALUES) # список пустых значений передает
+    empty_values = list(validators.EMPTY_VALUES) 
 
     def validate(self, value):
         if value is None:
@@ -160,10 +142,6 @@ class PassResetForm(PasswordResetForm):
 
 
 class ResetPassForm (SetPasswordForm):
-    """
-        Форма, позволяющая пользователю изменять свой пароль,
-        не вводя свой старый пароль
-    """
 
     error_messages = {
         'password_mismatch': _("Пароли не совпадают."),
