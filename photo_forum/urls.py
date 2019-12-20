@@ -26,6 +26,5 @@ urlpatterns = [
     path('messages/', include('direct_messages.urls'))
 ]
 
-# чтобы загружались фотки в режиме отладки
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
