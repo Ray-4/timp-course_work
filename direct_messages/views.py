@@ -11,8 +11,6 @@ class InboxView(LoginRequiredMixin, ListView):
     model = DirectMessage
     template_name = 'direct_messages/inbox.html'
 
-# Queryset возвращает одно DirectMessage, если оно существует, от каждого
-# пользователя, чтобы создать ссылку на поток сообщений с этим пользователем.
     def get_queryset(self):
         senders = User.objects.all()
         queryset = []
@@ -28,9 +26,6 @@ class ThreadView(LoginRequiredMixin, ListView):
     model = DirectMessage
     template_name = 'direct_messages/thread.html'
 
-# Queryset объединяет два набора запросов между двумя пользователями, один с пользователем в качестве получателя,
-# и один с пользователем в качестве отправителя, затем заказы по дате для отображения цепочки сообщений
-# между двумя пользователями.
     def get_queryset(self):
         user = get_object_or_404(User, username=self.kwargs.get('username'))
         dm1 = DirectMessage.objects.filter(receiver=user, sender=self.request.user)
