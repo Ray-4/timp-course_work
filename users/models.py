@@ -5,12 +5,7 @@ from PIL import Image
 
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    # on_delete=models.CASCADE - Каскадное удаление. Django эмулирует поведение SQL правила
-    # ON DELETE CASCADE и так же удаляет объекты, связанные через ForeignKey.
     website = models.CharField(verbose_name='Веб-сайт', max_length=100, null=True, blank=True)
-    # При blank=True, проверка данных в форме позволит сохранять пустое значение в поле.
-    # null При True Django сохранит пустое значение как NULL в базе данных.
-
     image = models.ImageField(default='default.jpg', upload_to='profile_pics')
     followers = models.ManyToManyField(User, blank=True, related_name='user_followers')
 
@@ -18,9 +13,6 @@ class Profile(models.Model):
         return f'{self.user.username} Profile'
 
 
-# Сохранение проверяет exif информацию для фотографий с мобильных телефонов, чтобы увидеть, какую
-# ориентацию фотография была сделана, затем изображение поворачивается в вертикальное положение.
-# изображения уменьшены для вывода 200px x 200px для экономии места на сервере.
     def save(self, **kwargs):
         super().save()
 
