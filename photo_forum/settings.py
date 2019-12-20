@@ -25,10 +25,8 @@ SECRET_KEY = 'b$a&!8(wcr(m$o5y+5kq+$(+7@-4mi0b&z8(b_yst-f@!6(6xt'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
-""" потом изменить на False, потому что много инфы из нее можно узнать"""
 
-# разрешенные хосты
-ALLOWED_HOSTS = ['127.0.0.1', 'localhost', '192.168.100.7']
+ALLOWED_HOSTS = []
 
 
 # Application definition
@@ -96,12 +94,11 @@ DATABASES['default'].update(db_from_env)
 # https://docs.djangoproject.com/en/2.1/topics/i18n/
 
 #LANGUAGE_CODE = 'en-us'
-# перевод на русс
 LANGUAGE_CODE = 'ru'
 
 TIME_ZONE = 'GMT'
 
-USE_I18N = True # активация системы перевода django
+USE_I18N = True 
 
 USE_L10N = True
 
@@ -127,20 +124,16 @@ LOGIN_REDIRECT_URL = 'photo_blog-home'
 LOGIN_URL = 'login'
 
 #EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-# скорее всего при нормальном ссоединении
+
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
-# для проверки в консоле выводим
 
 EMAIL_HOST = 'smtp.mail.ru'
 EMAIL_PORT = 465
 EMAIL_USE_TLS = True
 
-EMAIL_HOST_USER = 'amellr@bk.ru'
-EMAIL_HOST_PASSWORD = 'timp7171'
-
-#EMAIL_HOST_USER = os.environ.get('EMAIL_USER')
-#EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_PASS')
+EMAIL_HOST_USER = os.environ.get('EMAIL_USER')
+EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_PASS')
 
 
 
