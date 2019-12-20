@@ -9,7 +9,6 @@ from django.urls import reverse
 from django.core.exceptions import ValidationError
 from io import BytesIO
 
-# получаем путь где сохранить изображения
 def get_image_path(instance, filename):
     return os.path.join('posts', str(instance.author), filename)
 
@@ -34,9 +33,6 @@ class Post(models.Model):
     def get_api_like_url(self):
         return reverse('photo_blog-post_like_api', kwargs={"pk": self.pk})
 
-# Сохранение проверяет exif информацию для фотографий с мобильных телефонов, чтобы увидеть, какую
-# ориентацию фотография была сделана, затем изображение поворачивается в вертикальное положение.
-# изображения уменьшены для вывода 200px x 200px для экономии места на сервере.
     def save(self, **kwargs):
         super().save()
 
@@ -72,10 +68,6 @@ class Comment(models.Model):
 
     def save(self, **kwargs):
         super().save()
-
-
-# Модель уведомлений используется для трех различных типов уведомлений: лайки
-# комменты, подписчики
 
 class Notification(models.Model):
     post = models.ForeignKey('photo_blog.Post', on_delete=models.CASCADE, null=True, blank=True)
