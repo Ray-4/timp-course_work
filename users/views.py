@@ -11,7 +11,6 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from rest_framework import authentication, permissions
 
 
-# регистрация
 def register(request):
     if request.method == 'POST':
         form = RegistrForm(request.POST)
@@ -49,10 +48,6 @@ def edit_profile(request):
     }
     return render(request, 'users/edit_profile.html', context)
 
-
-# Это представление создает REST API. Каждый раз, когда к REST API обращаются
-# через кнопку jQuery, аутентифицированный пользователь добавляется / удаляется из
-# списка пользователей, которые следили за конкретным пользователем.
 
 class FollowUser(APIView):
     authentication_classes = (authentication.SessionAuthentication,)
