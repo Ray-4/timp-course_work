@@ -1,0 +1,26 @@
+{% extends "photo_blog/base.html" %}
+{% load material_form %}
+{% block content %}
+
+    <div class="">
+        <form class ="active" method="POST">
+
+            {% csrf_token %}
+            <fieldset class="form-group">
+
+                {% form form=form %}{% endform %}
+
+                <div class="form-group">
+                    <button type="submit" name="_submit" class="btn">Войти</button>
+                    <a href="{% url 'password_reset' %}">Забыли пароль?</a>
+                </div>
+
+                У вас нет аккаунта?
+                <a href="{% url 'register' %}">Зарегистрироваться</a>
+
+            </fieldset>
+
+        </form>
+    </div>
+
+{% endblock %}

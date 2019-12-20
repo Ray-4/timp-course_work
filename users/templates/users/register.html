@@ -1,0 +1,24 @@
+{% extends "photo_blog/base.html" %}
+{% load material_form %}
+
+{% block content %}
+
+    <div class="">
+
+        <form method="POST">
+
+            {% csrf_token %}
+            <fieldset>
+                {% form form=form %}{% endform %}
+                <button type="submit" name="_submit" class="btn">Регистрация</button>
+
+            <br><br>
+            У вас уже есть аккаунт?
+                <a href="{% url 'login' %}">Авторизоваться</a>
+
+            </fieldset>
+
+        </form>
+    </div>
+
+{% endblock %}

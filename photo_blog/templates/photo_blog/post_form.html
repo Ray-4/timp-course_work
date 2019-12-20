@@ -1,0 +1,26 @@
+{% extends "photo_blog/base.html" %}
+{% load material_form %}
+{% block content %}
+
+<center>
+    <h4>Пост</h4>
+</center>
+
+<div>
+<!-- enctupe - Способ кодирования данных формы.-->
+<!-- если используется поле для отправки файла (input type="file"),
+следует определить атрибут enctype как multipart/form-data. -->
+
+  <form class="active" method="POST" enctype="multipart/form-data">
+      {% csrf_token %}
+      <fieldset>
+        {% form form=form %}
+
+        {% endform %}
+        <button type="submit" name="_submit" class="btn">Опубликовать</button>
+      </fieldset>
+  </form>
+
+</div>
+
+{% endblock %}
